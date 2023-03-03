@@ -1,0 +1,94 @@
+{
+    "attack": [
+        {
+            "id": "short_sword",
+            "name": "short sword",
+            "prefab": "sword_attack",
+            "power": 4,
+            "mp": 0,
+            "type": "offense"
+        },
+        {
+            "id": "long_sword",
+            "name": "long sword",
+            "prefab": "sword_attack",
+            "power": 10,
+            "mp": 0,
+            "type": "offense"
+        }
+    ],
+    "magic": [
+        {
+            "id": "fireball",
+            "name": "fireball",
+            "prefab": "fireball",
+            "power": 12,
+            "mp": 3,
+            "type": "offense",
+            "description": "Launch a minor fire ball on the enemy"
+        },
+        {
+            "id": "fireblast",
+            "name": "fireblast",
+            "prefab": "fireball",
+            "power": 25,
+            "mp": 8,
+            "type": "offense",
+            "description": "Launch a medium fire ball on the enemy"
+        }
+    ],
+    "talent": [
+        {
+            "id": "brawler",
+            "name": "brawler",
+            "prefab": "fireball",
+            "levelmax": 3,
+            "type": "offense",
+            "levelup": "levelup_A",
+            "description": "Magic notes restore {0}% of life, but {1}% less MP"
+        },
+        {
+            "id": "battle mage",
+            "name": "battle mage",
+            "prefab": "fireball",
+            "levelmax": 3,
+            "type": "offense",
+            "levelup": "levelup_A"
+        },
+        {
+            "id": "critical vampire",
+            "name": "critical vampire",
+            "prefab": "fireball",
+            "levelmax": 4,
+            "type": "offense",
+            "levelup": "levelup_A",
+            "description": "A successful perfect attack gives {0}% HP"
+        }
+    ],
+    "levelup_A": [
+        {
+            "level": 1,
+            "apneeded": 0,
+            "power1": 1,
+            "power2": 20
+        },
+        {
+            "level": 2,
+            "apneeded": 25,
+            "power1": 2,
+            "power2": 15
+        },
+        {
+            "level": 3,
+            "apneeded": 150,
+            "power1": 3,
+            "power2": 10
+        },
+        {
+            "level": 4,
+            "apneeded": 500,
+            "power1": 4,
+            "power2": 5
+        }
+    ]
+}

@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &198824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 408350}
+  - 114: {fileID: 11487366}
+  m_Layer: 0
+  m_Name: Profile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &408350
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 153.7467, y: 133.66496, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11487366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e592a029aa94342a6d85c62c13e000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile:
+    PlayerName: player
+    Xp: 0
+    Initialized: 0
+    Characters:
+    - Id: 0
+      Name: JeanJean
+      Xp: 0
+      Job: 0
+      Tiers: 1
+      Equipments:
+      - Id: cap
+        EquipmentType: 0
+      - Id: wooden_bat
+        EquipmentType: 1
+      Looks:
+      - Id: eyes
+        LooksType: 0
+      - Id: eyebrows2
+        LooksType: 1
+      Skills: []
+      Talent: brawler
+      ColorId: 0
+    - Id: 1
+      Name: Rosalie
+      Xp: 0
+      Job: 2
+      Tiers: 1
+      Equipments:
+      - Id: knife
+        EquipmentType: 1
+      Looks:
+      - Id: 
+        LooksType: 0
+      - Id: 
+        LooksType: 1
+      - Id: 
+        LooksType: 2
+      Skills: []
+      Talent: brawler
+      ColorId: 1
+    - Id: 2
+      Name: Oh
+      Xp: 0
+      Job: 1
+      Tiers: 1
+      Equipments:
+      - Id: axe
+        EquipmentType: 1
+      Looks:
+      - Id: 
+        LooksType: 0
+      - Id: 
+        LooksType: 1
+      - Id: 
+        LooksType: 2
+      Skills: []
+      Talent: brawler
+      ColorId: 2
+    CurrentTeam:
+    - 0
+    - 1
+    - 2
+    Shards:
+    - Id: min_red
+      Quantity: 3
+    - Id: min_blue
+      Quantity: 2
+    - Id: min_green
+      Quantity: 3
+    Maps:
+    - Name: World1
+      Levels: []
+  BattleData:
+    TotalXp: 0
+    Characters: []
+    Shards: []
+    NotesCount: 0
+    TotalScore: 0
+  m_resetPrefsAtLaunch: 1
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 198824}
+  m_IsPrefabParent: 1

@@ -1,0 +1,50 @@
+{
+    "warrior_skills": [
+        {
+            "id": 0,
+            "skillid": "fireball",
+            "tiers": 2,
+            "weight": 1
+        }
+    ],
+    "warrior_talents": [
+        {
+            "id": 0,
+            "skillid": "brawler",
+            "tiers": 1,
+            "weight": 1
+        }
+    ],
+    "magus_skills": [
+        {
+            "id": 0,
+            "skillid": "fireball",
+            "tiers": 1,
+            "weight": 1
+        }
+    ],
+    "magus_talents": [
+        {
+            "id": 0,
+            "skillid": "brawler",
+            "tiers": 1,
+            "weight": 1
+        }
+    ],
+    "thief_skills": [
+        {
+            "id": 0,
+            "skillid": "fireball",
+            "tiers": 2,
+            "weight": 1
+        }
+    ],
+    "thief_talents": [
+        {
+            "id": 0,
+            "skillid": "brawler",
+            "tiers": 1,
+            "weight": 1
+        }
+    ]
+}

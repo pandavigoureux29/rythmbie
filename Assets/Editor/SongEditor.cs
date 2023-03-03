@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
 using System.IO;
@@ -33,18 +33,18 @@ public class SongEditor : Editor {
 		m_target.music =(AudioClip) EditorGUILayout.ObjectField ("Music", m_target.music, typeof (AudioClip), true);
 		if( m_target.music == null)
 			m_target.songName = EditorGUILayout.TextField ("DebugName", m_target.songName);
-		//m_target.difficulty = (BattleEngine.Difficulty) EditorGUILayout.EnumPopup ("Diff",m_target.difficulty);
+		m_target.difficulty = (BattleEngine.Difficulty) EditorGUILayout.EnumPopup ("Diff",m_target.difficulty);
 		m_target.timeSpeed = EditorGUILayout.FloatField ("Time speed", m_target.timeSpeed);
 
 		if (GUILayout.Button ("Export")) {
-			//m_target.Export(m_target.music.name,m_target.difficulty);
+			m_target.Export(m_target.music.name,m_target.difficulty);
 		}
 		
 		GUILayout.Space (5.0f);
 		GUILayout.Box("", new GUILayoutOption[]{GUILayout.ExpandWidth(true), GUILayout.Height(1)});
 		GUILayout.Space (5.0f);
 		m_target.songImportName = EditorGUILayout.TextField ("Import Name", m_target.songImportName);
-		//m_target.songImportDifficulty = (BattleEngine.Difficulty) EditorGUILayout.EnumPopup ("Diff",m_target.songImportDifficulty);
+		m_target.songImportDifficulty = (BattleEngine.Difficulty) EditorGUILayout.EnumPopup ("Diff",m_target.songImportDifficulty);
 
 		if (GUILayout.Button ("Import")) {
 			m_target.Import();
@@ -59,10 +59,6 @@ public class SongEditor : Editor {
 		GUILayout.Space (15.0f);
 		GUILayout.Box("", new GUILayoutOption[]{GUILayout.ExpandWidth(true), GUILayout.Height(1)});
 		if (GUILayout.Button ("ClearAll")) {
-			m_target.ClearAll();
-		}
-		
-		if (GUILayout.Button ("New Track")) {
 			m_target.ClearAll();
 		}
 	}
