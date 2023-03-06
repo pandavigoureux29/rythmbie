@@ -28,3 +28,8 @@ public enum ActionType
     ATTACK, MAGIC, TALENT
 }
 
+public enum GameDifficulty
+{
+    EASY, NORMAL, HARD
+}
+

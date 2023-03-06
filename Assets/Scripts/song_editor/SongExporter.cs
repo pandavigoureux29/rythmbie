@@ -53,7 +53,7 @@ public class SongExporter {
 		m_json.AddField ("notes", allNotes);
 	}
 
-	public TextAsset Export(string _songName, BattleEngine.Difficulty _difficulty){
+	public TextAsset Export(string _songName, GameDifficulty _difficulty){
 
 #if UNITY_EDITOR
         string fullName = _songName + "_"+_difficulty.ToString().ToLower();

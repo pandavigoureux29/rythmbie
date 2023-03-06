@@ -29,12 +29,12 @@ public class SongEditorManager : MonoBehaviour {
 	//Export Variables
 	[HideInInspector][SerializeField] public AudioClip music;
 	[HideInInspector][SerializeField] public string songName = "song";
-	[HideInInspector][SerializeField] public BattleEngine.Difficulty difficulty ;
+	[HideInInspector][SerializeField] public GameDifficulty difficulty ;
 	[HideInInspector][SerializeField] public float timeSpeed = 2.0f;
 
 	//import Variables
 	[HideInInspector][SerializeField] public string songImportName;
-	[HideInInspector][SerializeField] public BattleEngine.Difficulty songImportDifficulty;
+	[HideInInspector][SerializeField] public GameDifficulty songImportDifficulty;
 
 	bool m_bootCheck = false;
 
@@ -70,14 +70,13 @@ public class SongEditorManager : MonoBehaviour {
 	}
 
 	public void OnGUI() {
-		if (GUI.Button (new Rect (10, 10, 150, 100), "LaunchTest")) {
+		/*if (GUI.Button (new Rect (10, 10, 150, 100), "LaunchTest")) {
 			TextAsset textAsset = Export("test",difficulty);
             m_battleData.Song = textAsset;
             m_battleData.TimeBegin = m_timeDebugBegin;
-            DataManager.instance.BattleData = m_battleData;
 			
             SceneManager.LoadScene(m_battleData.sceneName);
-        }
+        }*/
 	}
 
 	//Called by SongEditor
@@ -162,7 +161,7 @@ public class SongEditorManager : MonoBehaviour {
 
 	#region IMPORT_EXPORT
 
-	public TextAsset Export(string _songName, BattleEngine.Difficulty _difficulty){
+	public TextAsset Export(string _songName, GameDifficulty _difficulty){
 		RecheckAll ();
 		//Export
 		m_exporter = new SongExporter ();

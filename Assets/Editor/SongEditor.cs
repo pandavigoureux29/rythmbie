@@ -33,7 +33,7 @@ public class SongEditor : Editor {
 		m_target.music =(AudioClip) EditorGUILayout.ObjectField ("Music", m_target.music, typeof (AudioClip), true);
 		if( m_target.music == null)
 			m_target.songName = EditorGUILayout.TextField ("DebugName", m_target.songName);
-		m_target.difficulty = (BattleEngine.Difficulty) EditorGUILayout.EnumPopup ("Diff",m_target.difficulty);
+		m_target.difficulty = (GameDifficulty) EditorGUILayout.EnumPopup ("Diff",m_target.difficulty);
 		m_target.timeSpeed = EditorGUILayout.FloatField ("Time speed", m_target.timeSpeed);
 
 		if (GUILayout.Button ("Export")) {
@@ -44,7 +44,7 @@ public class SongEditor : Editor {
 		GUILayout.Box("", new GUILayoutOption[]{GUILayout.ExpandWidth(true), GUILayout.Height(1)});
 		GUILayout.Space (5.0f);
 		m_target.songImportName = EditorGUILayout.TextField ("Import Name", m_target.songImportName);
-		m_target.songImportDifficulty = (BattleEngine.Difficulty) EditorGUILayout.EnumPopup ("Diff",m_target.songImportDifficulty);
+		m_target.songImportDifficulty = (GameDifficulty) EditorGUILayout.EnumPopup ("Diff",m_target.songImportDifficulty);
 
 		if (GUILayout.Button ("Import")) {
 			m_target.Import();
