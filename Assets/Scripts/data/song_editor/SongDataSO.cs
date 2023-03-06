@@ -2,21 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[CreateAssetMenu(fileName = "Song", menuName = "SongData/Song")]
 public class SongDataSO : ScriptableObject {
 
 	[SerializeField] protected string m_songName;
+	[SerializeField] protected GameDifficulty m_difficulty;
+	[SerializeField] protected AudioClip m_music;
 
 	[SerializeField] protected  List< SongDataSegment > m_segments;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public List<NoteData> GetAllNotes(){
 		List<NoteData> notes = new List<NoteData> ();
@@ -28,7 +21,19 @@ public class SongDataSO : ScriptableObject {
 
 	[System.Serializable]
 	public class SongDataSegment{
-		public string name;
+		public string Id;
 		public List<NoteData> m_notes;
 	}
+
+	public string SongName => m_songName;
+
+	public GameDifficulty Difficulty => m_difficulty;
+	
+	public AudioClip Clip => m_music;
+	
+	public List< SongDataSegment > Segments
+	{
+		get { return m_segments; }
+		set { m_segments = value; }
+	}  
 }

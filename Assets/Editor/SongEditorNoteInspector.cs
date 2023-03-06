@@ -13,7 +13,7 @@ public class SongEditorNoteInspector : Editor {
 	public override void OnInspectorGUI(){
 		//TYPE
 		EditorGUI.BeginChangeCheck ();
-		m_note.type = (NoteData.NoteType) EditorGUILayout.EnumPopup ("Type",m_note.type);
+		m_note.type = (NoteType) EditorGUILayout.EnumPopup ("Type",m_note.type);
 		if (EditorGUI.EndChangeCheck ()) {
 			m_note.OnTypeChanged();
 		}

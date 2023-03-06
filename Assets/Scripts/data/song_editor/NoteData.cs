@@ -6,10 +6,9 @@ public class NoteData {
 
 	[SerializeField] protected float m_timeBegin;
 	
-	public enum NoteType{ SIMPLE, LONG };
 	[SerializeField] protected NoteType m_type = NoteType.SIMPLE;
 
-	[SerializeField] protected int m_trackID= 0;
+	[SerializeField] protected string m_trackID= "";
 	
 	public enum NoteSubtype { REGULAR, MAGIC, NOTHING };
 	[SerializeField] protected NoteSubtype m_subtype;
@@ -41,7 +40,7 @@ public class NoteData {
 		}
 	}
 
-	public int TrackID {
+	public string TrackID {
 		get {
 			return m_trackID;
 		}

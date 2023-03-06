@@ -37,7 +37,7 @@ public class SongEditorPlayerNotes : MonoBehaviour {
 	}
 
 	void PlayNote(){
-		if (m_currentNote.type == NoteData.NoteType.LONG && m_currentNote.head == false) {
+		if (m_currentNote.type == NoteType.LONG && m_currentNote.head == false) {
 			m_audioSource.clip = m_noteLongTailSound;
 		} else {
 			m_audioSource.clip = m_noteHitSound;

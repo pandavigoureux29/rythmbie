@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
@@ -26,19 +28,10 @@ public class SongEditorManager : MonoBehaviour {
 
 	[SerializeField] SongEditorCamera m_camera;
 
-	//Export Variables
-	[HideInInspector][SerializeField] public AudioClip music;
-	[HideInInspector][SerializeField] public string songName = "song";
-	[HideInInspector][SerializeField] public GameDifficulty difficulty ;
 	[HideInInspector][SerializeField] public float timeSpeed = 2.0f;
 
-	//import Variables
-	[HideInInspector][SerializeField] public string songImportName;
-	[HideInInspector][SerializeField] public GameDifficulty songImportDifficulty;
 
 	bool m_bootCheck = false;
-
-	SongExporter m_exporter;
 
 	AudioSource m_audioSource;
 
@@ -49,6 +42,9 @@ public class SongEditorManager : MonoBehaviour {
 
     [SerializeField] BattleDataAsset m_battleData;
     [SerializeField] float m_timeDebugBegin;
+    
+    [Header("IMPORT/EXPORT")]
+    [SerializeField] private SongDataSO m_songAsset;
 
 	// Use this for initialization
 	void Start () {
@@ -111,35 +107,60 @@ public class SongEditorManager : MonoBehaviour {
 	#region NOTECREATION
 
 	void CreateNewNote(RaycastHit _hit,Vector3 _mousePos){
-		int trackPressed = -1;
+		string trackPressed = null;
 		//if hit found
 		if( _hit.collider){
 			//Search in tracks to see if it's a track
 			for(int i=0; i < m_tracks.Count; i++){
 				if( m_tracks[i].gameObject == _hit.collider.gameObject){
-					trackPressed = i;
+					trackPressed = m_tracks[i].Id;
 					break;
 				}
 			}	
 		}
 
-		if( trackPressed >= 0 ){
+		if( trackPressed != null ){
 			AddNote(trackPressed, _hit.point);
 		}
 	}
 
-	SongEditorNote AddNote(int _trackID, Vector3 _position){
+	SongEditorNote AddNote(string _trackID, Vector3 _position){
 		if (m_bootCheck == false)
 			BootCheck ();
+
+		var track = m_tracks.FirstOrDefault(x => x.Id == _trackID);
+
+		if (track == null)
+		{
+			Debug.LogError($"[IMPORT] Track of Id {_trackID} doesnt seem to be instantiated.");
+		}
 
 		GameObject go = Instantiate (m_simpleNotePrefab) as GameObject;
 		go.transform.position = _position;
 
 		SongEditorNote note = go.GetComponent<SongEditorNote> ();
-		m_tracks [_trackID].AddNote (note);
+		track.AddNote (note);
 		SelectNote (note);
 
 		return note;
+	}
+	
+	SongEditorNote AddNote(string _trackID, float _time){
+		if (m_bootCheck == false)
+			BootCheck ();
+
+		var track = m_tracks.FirstOrDefault(x => x.Id == _trackID);
+
+		if (track == null)
+		{
+			Debug.LogError($"[IMPORT] Track of Id {_trackID} doesnt seem to be instantiated.");
+		}
+
+		var x = ComputeNoteXByTime(_time);
+		var position = track.transform.position;
+		position.x = x;
+
+		return AddNote(_trackID, position);
 	}
 
 	#endregion
@@ -161,76 +182,58 @@ public class SongEditorManager : MonoBehaviour {
 
 	#region IMPORT_EXPORT
 
-	public TextAsset Export(string _songName, GameDifficulty _difficulty){
-		RecheckAll ();
-		//Export
-		m_exporter = new SongExporter ();
+	public void Export()
+	{
+		m_songAsset.Segments.Clear();
+		
+		for(int i=0; i < m_tracks.Count; i++)
+		{
+			var track = m_tracks[i];
+			track.SortNotes();
 
-		m_exporter.SetUp (this);
+			if (track.Notes.Count == 0)
+			{
+				Debug.LogError("[EXPORT] Track " + track.Id + " has not notes. Skipping.");
+				continue;
+			}
 
-		List<List<SongEditorNote>> notesByTrack = new List<List<SongEditorNote>> ();
-		//Sort Notes
-		for(int i=0; i < m_tracks.Count; i++){
-			m_tracks[i].SortNotes();
-			notesByTrack.Add( new List<SongEditorNote>( m_tracks[i].Notes.ToArray() ) );
+			//create new segment in asset
+			var newSegment = new SongDataSO.SongDataSegment();
+			newSegment.Id = track.Id;
+			newSegment.m_notes = new List<NoteData>();
+			m_songAsset.Segments.Add(newSegment);
+			
+			//fill asset notes
+			foreach (var note in track.Notes)
+			{
+				var newNote = new NoteData();
+				newNote.Time = note.time;
+				newNote.Head = note.head;
+				newNote.Type = note.type;
+				newNote.TrackID = track.Id;
+				
+				newSegment.m_notes.Add(newNote);
+			}
 		}	
-		List< SongEditorNote> allNotes = new List<SongEditorNote> ();
-		bool done = false;
-		//go through each track and get the earliest note till none is left
-		while (!done) {
-			int trackID = -1;
-			float bestTime = float.MaxValue;
-			//check each track and get best
-			for( int t=0; t < notesByTrack.Count; t++){
-				List< SongEditorNote> track = notesByTrack[t];
-				//keep best track
-				if( track.Count > 0 && track[0].time < bestTime ){
-					bestTime = track[0].time;
-					trackID = t;
-				}
-			}
-			if( trackID < 0 ){
-				done = true;
-			}else{
-				SongEditorNote bestNote = notesByTrack[trackID][0];
-				notesByTrack[trackID].RemoveAt(0);
-				allNotes.Add(bestNote);
-			}
-		}
-		//now we have all notes. Set them to the exporter
-		m_exporter.SetNotes (allNotes);
-		return m_exporter.Export (_songName,_difficulty);
+		
+		Debug.Log("[IMPORT] FINISHED");
 	}
 
 	public void Import(){
-		string dataSongName = songImportName + "_" + songImportDifficulty.ToString ().ToLower ();
-		TextAsset jsonFile = Resources.Load ("song_data/"+songImportName+"/"+dataSongName) as TextAsset;
-		if (jsonFile == null) {
-			Debug.LogError( "Failed to load song_data/"+songImportName+"/"+dataSongName);
-			return;
-		}
 
 		ClearAll ();
 
-		//PArse JSON
-		JSONObject jsonData = new JSONObject (jsonFile.text);
-
-		//variables
-		timeSpeed = jsonData.GetField ("timeSpeed").n;
-
-		//Create Notes
-		List<JSONObject> arrayNotes = jsonData.GetField ("notes").list;
-		foreach(JSONObject noteJSON in arrayNotes){
-			SongEditorNote newNote = AddNote((int) noteJSON.GetField("track").n,new Vector3() );
-			//Debug.Log( noteJSON);
-			newNote.type = (NoteData.NoteType) ((int)noteJSON.GetField("type").n);
-			newNote.time = noteJSON.GetField("time").f;
-			newNote.head = noteJSON.GetField("head").b;
-            newNote.OnTypeChanged();
+		for(int i=0; i < m_songAsset.Segments.Count; i++)
+		{
+			var segment = m_songAsset.Segments[i];
+			var track = m_tracks[i];
+			track.Id = segment.Id;
+			foreach (var note in segment.m_notes)
+			{
+				AddNote(segment.Id, note.Time);
+			}
 		}
 
-		//try loading audioClip
-		music = Resources.Load ("songs/"+songImportName) as AudioClip;;
 	}
 
 	#endregion
@@ -239,13 +242,13 @@ public class SongEditorManager : MonoBehaviour {
 	public void Play(){
 		m_lastMode = m_mode;
 		m_mode = Mode.PLAY;
-		if (music != null) {
+		if (m_songAsset.Clip != null) {
 			RecheckAll();
 
-			AudioComponent.clip = music;
+			AudioComponent.clip = m_songAsset.Clip;
 			//compute playbar time
 			float deltaX = m_camera.PlayBar.localPosition.x - m_startX;
-			AudioComponent.timeSamples = (int) (deltaX / UnitsPerSeconds) * music.frequency;
+			AudioComponent.timeSamples = (int)(deltaX / UnitsPerSeconds) * 120;// music.frequency;
 
 			AudioComponent.Play();
 

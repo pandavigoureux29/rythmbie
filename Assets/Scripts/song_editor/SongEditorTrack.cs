@@ -8,7 +8,7 @@ public class SongEditorTrack : MonoBehaviour {
 	[SerializeField] GameObject m_notesGroup;
 
 	[SerializeField] List<SongEditorNote> m_notes;
-	[SerializeField] int m_id;
+	[SerializeField] string m_id;
 	Transform m_transform;
 
 	public void AddNote(SongEditorNote _note){
@@ -103,9 +103,13 @@ public class SongEditorTrack : MonoBehaviour {
 		}
 	}
 
-	public int Id {
+	public string Id {
 		get {
 			return m_id;
+		}
+		set
+		{
+			m_id = value;
 		}
 	}
 }

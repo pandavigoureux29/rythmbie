@@ -4,7 +4,7 @@ using System.Collections;
 [ExecuteInEditMode]
 public class SongEditorNote : MonoBehaviour {
 
-	[HideInInspector][SerializeField] protected NoteData.NoteType m_type;
+	[HideInInspector][SerializeField] protected NoteType m_type;
 	[HideInInspector][SerializeField] protected float m_time = 0;
 	public bool head = false;
 
@@ -38,17 +38,17 @@ public class SongEditorNote : MonoBehaviour {
 	//Called by Custom Inspector
 	public void OnTypeChanged(){
 		switch( type ){
-			case NoteData.NoteType.SIMPLE : ChangeToSimple(); break;
-			case NoteData.NoteType.LONG : ChangeToLong(); break;
+			case NoteType.SIMPLE : ChangeToSimple(); break;
+			case NoteType.LONG : ChangeToLong(); break;
         }
 	}
 
-	public NoteData.NoteType ToggleType(){
-		NoteData.NoteType newType = NoteData.NoteType.SIMPLE;
+	public NoteType ToggleType(){
+		NoteType newType = NoteType.SIMPLE;
 		switch (m_type)
         {
-            case NoteData.NoteType.SIMPLE: newType = NoteData.NoteType.LONG; break;
-            case NoteData.NoteType.LONG : newType = NoteData.NoteType.SIMPLE; break;
+            case NoteType.SIMPLE: newType = NoteType.LONG; break;
+            case NoteType.LONG : newType = NoteType.SIMPLE; break;
 		}
 		m_type = newType;
 		OnTypeChanged ();
@@ -101,7 +101,7 @@ public class SongEditorNote : MonoBehaviour {
 		}
 	}
 
-	public NoteData.NoteType type {
+	public NoteType type {
 		get {
 			return m_type;
 		}
