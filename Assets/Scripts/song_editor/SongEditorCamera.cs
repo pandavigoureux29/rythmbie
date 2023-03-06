@@ -66,11 +66,6 @@ public class SongEditorCamera : MonoBehaviour {
             PlaceTimeBars();
         }
 
-        //Change Mode
-        if (GUI.Button (new Rect (150, 0, 55, 50), m_manager.CurrentMode.ToString())) {
-			m_manager.ChangeMode();
-		}
-
 		//PLAY
 		if (m_manager.CurrentMode == SongEditorManager.Mode.PLAY) {
 			if (GUI.Button (new Rect (250, 0, 55, 50), "Stop")) {

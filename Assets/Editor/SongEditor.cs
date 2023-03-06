@@ -7,7 +7,7 @@ using System.IO;
 public class SongEditor : Editor {
 
 	SongEditorManager m_target;
-
+	private bool m_isDeleteNoteButtonDown = false;
 	
 	void OnEnable(){
 		m_target = (SongEditorManager)target;
@@ -69,6 +69,11 @@ public class SongEditor : Editor {
 			m_target.OnSceneClick (mousePos);
 		} else {
 			m_target.OnSceneRelease(mousePos);
+		}
+
+		if (e.keyCode == KeyCode.LeftShift)
+		{
+			m_target.IsDeleteKeyDown = e.type == EventType.KeyDown;
 		}
 		
 		//Clean hotControl

@@ -20,9 +20,8 @@ public class SongEditorManager : MonoBehaviour {
 
 	float m_startX = 0;
 
-	public enum Mode{ EDIT, CREATE, DELETE, PLAY, _COUNT };
+	public enum Mode{ EDIT,PLAY, _COUNT };
 	Mode m_mode = Mode.EDIT;
-	Mode m_lastMode = Mode.EDIT;
 
 	[SerializeField] GameObject m_simpleNotePrefab;
 
@@ -83,17 +82,18 @@ public class SongEditorManager : MonoBehaviour {
 		RaycastHit hit = new RaycastHit();
 		bool hasHit = Physics.Raycast (ray, out hit, 1000.0f);
 
-		if (hasHit) {	
+		if (hasHit)
+		{
+			var noteHit = CheckNoteHit(hit);
 			//Creation
-			if (m_mode == Mode.CREATE) {
+			if (noteHit == null) {
 				CreateNewNote (hit, _mousePos);
 				//Edition
-			} else if (m_mode == Mode.EDIT || m_mode == Mode.DELETE) {
-				SongEditorNote note = CheckNoteHit (hit);
-				if( m_mode == Mode.EDIT)
-					SelectNote (note);
+			} else{
+				if(IsDeleteKeyDown)
+					DeleteNote(noteHit);
 				else
-					DeleteNote(note);
+					SelectNote (noteHit);
 			}
 		} else {
 			SelectNote(null);
@@ -240,7 +240,6 @@ public class SongEditorManager : MonoBehaviour {
 
 	#region MUSIC
 	public void Play(){
-		m_lastMode = m_mode;
 		m_mode = Mode.PLAY;
 		if (m_songAsset.Clip != null) {
 			RecheckAll();
@@ -256,7 +255,7 @@ public class SongEditorManager : MonoBehaviour {
 		}
 	}
 	public void Stop(){
-		m_mode = m_lastMode;
+		m_mode = Mode.EDIT;
 		AudioComponent.Stop ();
 	}
 	#endregion
@@ -362,17 +361,6 @@ public class SongEditorManager : MonoBehaviour {
         m_camera.Reset();
     }
 
-    public void ChangeMode(){
-		if (m_mode == Mode.PLAY)
-			return;
-		switch (m_mode) {
-		case Mode.CREATE : m_mode = Mode.EDIT; break;
-		case Mode.EDIT : m_mode = Mode.DELETE; break;
-		case Mode.DELETE : m_mode = Mode.CREATE; break;
-			
-		}
-	}
-
 	public float UnitsPerSeconds {
 		get {
 			return m_unitsPerSeconds;
@@ -413,5 +401,7 @@ public class SongEditorManager : MonoBehaviour {
 			return m_tracks;
 		}		 
 	}
+
+	public bool IsDeleteKeyDown { get; set; } = false;
 
 }
