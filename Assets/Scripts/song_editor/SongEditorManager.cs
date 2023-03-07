@@ -200,7 +200,7 @@ public class SongEditorManager : MonoBehaviour {
 			//create new segment in asset
 			var newSegment = new SongDataSO.SongDataSegment();
 			newSegment.Id = track.Id;
-			newSegment.m_notes = new List<NoteData>();
+			newSegment.Notes = new List<NoteData>();
 			m_songAsset.Segments.Add(newSegment);
 			
 			//fill asset notes
@@ -212,7 +212,7 @@ public class SongEditorManager : MonoBehaviour {
 				newNote.Type = note.type;
 				newNote.TrackID = track.Id;
 				
-				newSegment.m_notes.Add(newNote);
+				newSegment.Notes.Add(newNote);
 			}
 		}	
 		
@@ -228,7 +228,7 @@ public class SongEditorManager : MonoBehaviour {
 			var segment = m_songAsset.Segments[i];
 			var track = m_tracks[i];
 			track.Id = segment.Id;
-			foreach (var note in segment.m_notes)
+			foreach (var note in segment.Notes)
 			{
 				AddNote(segment.Id, note.Time);
 			}

@@ -12,7 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ca66e6e6c5840443b992c05f35f2f9e, type: 3}
   m_Name: MasterSlayer
   m_EditorClassIdentifier: 
-  m_songName: MAster Slayer
+  m_songName: Master Slayer
   m_difficulty: 0
   m_music: {fileID: 8300000, guid: 50e029b9645a16d4b96c814afec30295, type: 3}
-  m_segments: []
+  m_speed: 1
+  m_segments:
+  - Id: Track1
+    Notes:
+    - m_timeBegin: 2.559957
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 3.980856
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 6.503961
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 9.688736
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+  - Id: Track2
+    Notes:
+    - m_timeBegin: 5.247766
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 8.442823
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0

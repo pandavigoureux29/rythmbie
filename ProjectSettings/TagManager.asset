@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Notes
+    uniqueID: 3032305829
+    locked: 0
+  - name: Track
+    uniqueID: 371644273
+    locked: 0
