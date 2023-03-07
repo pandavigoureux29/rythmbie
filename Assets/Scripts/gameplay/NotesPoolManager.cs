@@ -8,6 +8,7 @@ public class NotesPoolManager : MonoBehaviour
     [SerializeField] private GameObject m_notePrefab;
     private Pool<NoteComponent> m_pool;
 
+    private int m_count = 0;
     public void Initialize()
     {
         m_pool = new Pool<NoteComponent>(CreateNoteComponent, CleanUp, Dispose);
@@ -32,13 +33,16 @@ public class NotesPoolManager : MonoBehaviour
     NoteComponent CreateNoteComponent()
     {
         var noteObject = Instantiate(m_notePrefab);
+        noteObject.name += "("+ m_count+")";
         noteObject.transform.SetParent(transform);
         noteObject.SetActive(false);
+        m_count++;
         return noteObject.GetComponent<NoteComponent>();
     }
 
     void CleanUp(NoteComponent noteComponent)
     {
+        noteComponent.gameObject.SetActive(false);
         noteComponent.CleanUp();
     }
 

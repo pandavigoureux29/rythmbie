@@ -35,3 +35,4 @@ public enum GameDifficulty
 
 public enum NoteType{ SIMPLE, LONG };
 
+public enum ScoreAccuracy { PERFECT, GOOD, BAD, MISSED}

@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager m_instance;
+    public static GameManager Instance => m_instance;
+    
     [SerializeField] private SongDataSO m_songAsset;
     [SerializeField] private TracksManager m_tracks;
     [SerializeField] private NotesGenerator m_notesGenerator;
+    [SerializeField] private ScoreManager m_scoreManager;
+
+    public SongDataSO SongData => m_songAsset;
+    public ScoreManager ScoreManager => m_scoreManager;
 
     [SerializeField] private AudioSource m_audio;
 
@@ -15,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        m_instance = this;
         m_tracks.Initialize();
         m_notesGenerator.Initialize(m_songAsset);
         m_audio.clip = m_songAsset.Clip;

@@ -15,7 +15,7 @@ MonoBehaviour:
   m_songName: Master Slayer
   m_difficulty: 0
   m_music: {fileID: 8300000, guid: 50e029b9645a16d4b96c814afec30295, type: 3}
-  m_speed: 1
+  m_speed: 3
   m_segments:
   - Id: Track1
     Notes:

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +27,17 @@ public class NotesGenerator : MonoBehaviour
         {
             var track = m_tracks.GetTrack(segment.Id);
             m_currentIndexNoteByTrack[track] = 0;
-            m_deltaTimeByTrack[track] = track.Distance / m_songAsset.Speed;
+            m_deltaTimeByTrack[track] = track.DistanceToSlot / m_songAsset.Speed;
         }
+        
+        LR.EventDispatcher.Instance.Subscribe<NoteDiedEventData>(OnNoteDied);
     }
-    
+
+    private void OnDestroy()
+    {
+        Reset();
+    }
+
     public void ManualUpdate(float time)
     {
         foreach (var track in m_currentIndexNoteByTrack.Keys.ToList())
@@ -62,5 +70,15 @@ public class NotesGenerator : MonoBehaviour
         newNote.gameObject.SetActive(true);
         newNote.Initialize(noteData,track, timeCreated);
         track.AddNote(newNote);
+    }
+
+    private void OnNoteDied(NoteDiedEventData noteEvent)
+    {
+        m_pool.Return(noteEvent.Note);
+    }
+
+    public void Reset()
+    {
+        LR.EventDispatcher.Instance.Unsubscribe<NoteDiedEventData>(OnNoteDied);
     }
 }
