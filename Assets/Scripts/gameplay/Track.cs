@@ -26,12 +26,17 @@ public class Track : MonoBehaviour
 
     private List<NoteComponent> m_notes = new List<NoteComponent>();
     private List<NoteComponent> m_notesToRemove = new List<NoteComponent>();
+
+    // Notes can be still updated but are not hittable anymore
+    private List<NoteComponent> m_activeNotes = new List<NoteComponent>();
     
     public TracksManager TracksManager
     {
         get;
         private set;
     }
+
+    public NoteComponent CurrentNote => m_activeNotes.Count > 0 ? m_activeNotes[0] : null;
 
     public void Initialize(TracksManager manager)
     {
@@ -47,10 +52,17 @@ public class Track : MonoBehaviour
     public void AddNote(NoteComponent note)
     {
         m_notes.Add(note);
+        m_activeNotes.Add(note);
+    }
+
+    public void DeactivateNote(NoteComponent note)
+    {
+        m_activeNotes.Remove(note);
     }
 
     public void RemoveNote(NoteComponent note)
     {
+        DeactivateNote(note);
         m_notes.Remove(note);
     }
 

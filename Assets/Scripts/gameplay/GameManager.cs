@@ -49,4 +49,8 @@ public class GameManager : MonoBehaviour
         m_tracks.ManualUpdate(m_audio.time);
     }
 
+    public void CheckInput(GameplayInputActionInfos inputActionInfos)
+    {
+        m_tracks.CheckTracks(inputActionInfos, m_audio.time);
+    }
 }

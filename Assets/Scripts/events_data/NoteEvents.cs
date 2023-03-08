@@ -6,3 +6,15 @@ public struct NoteDiedEventData
 {
     public NoteComponent Note;
 }
+
+
+public struct NoteMissedEventData
+{
+    public NoteComponent Note;
+}
+
+
+public struct NoteHitEventData
+{
+    public NoteComponent Note;
+}

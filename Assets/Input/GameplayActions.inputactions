@@ -1,0 +1,104 @@
+{
+    "name": "GameplayActions",
+    "maps": [
+        {
+            "name": "BattleController",
+            "id": "0f6c0c19-41e0-48bd-b5a1-a83887e66d87",
+            "actions": [
+                {
+                    "name": "LeftTap",
+                    "type": "Button",
+                    "id": "62769db2-bc47-4cf5-8048-8a119dd78b7d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightTap",
+                    "type": "Button",
+                    "id": "1985858f-62a8-4f3f-ba55-e09119dee557",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f3f9dab5-7267-42e5-a3d6-47ba7dfd1a15",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d72c1a12-ea04-403c-83ae-fd744aeded91",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76ec561e-0136-455c-b924-e7e61c3fca19",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93895be8-8ccb-4e1b-86de-2fd3049ab022",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "BattleTouch",
+            "id": "f6d2b3d0-abb0-4f2c-8e2b-e6424a243894",
+            "actions": [
+                {
+                    "name": "Press",
+                    "type": "Value",
+                    "id": "f8298ad0-de50-40e7-b73d-ddd6b95d8cdb",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e77e634b-1103-426a-ac2f-0fc4fa90e76e",
+                    "path": "<Touchscreen>/primaryTouch",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Press",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

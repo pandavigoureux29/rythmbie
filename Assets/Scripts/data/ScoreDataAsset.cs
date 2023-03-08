@@ -11,13 +11,13 @@ public class ScoreDataAsset : ScriptableObject
 
     public ScoreAccuracy GetAccuracy(float deltaTime)
     {
-        float best = Single.PositiveInfinity;
-        ScoreAccuracy result = ScoreAccuracy.BAD;
+        float best = 1000;
+        ScoreAccuracy result = ScoreAccuracy.MISSED;
         foreach (var accData in Accuracies)
         {
-            if (deltaTime <= accData.DeltaTime && best < deltaTime)
+            if (best > accData.DeltaTime && deltaTime <= accData.DeltaTime)
             {
-                best = deltaTime;
+                best = accData.DeltaTime;
                 result = accData.Accuracy;
             }
         }
