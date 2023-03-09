@@ -6,6 +6,8 @@ public class CharacterVisual : MonoBehaviour
 {
     [SerializeField] private Animator m_charAnimator;
     [SerializeField] private InputRegion m_region;
+
+    [SerializeField] private ParticleSystem m_fireArmEffect;
     
     public void Initialize()
     {
@@ -23,5 +25,6 @@ public class CharacterVisual : MonoBehaviour
     void Fire()
     {
         m_charAnimator.SetTrigger("Fire");
+        m_fireArmEffect.Play();
     }
 }
