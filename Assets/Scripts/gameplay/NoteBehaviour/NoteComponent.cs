@@ -9,6 +9,7 @@ public class NoteComponent : MonoBehaviour
     private NoteData m_noteData;
     public NoteData Data => m_noteData;
     private Track m_track;
+    public Track Track => m_track;
     private float m_timeCreated;
 
     private float m_distanceDone = 0;
@@ -66,7 +67,7 @@ public class NoteComponent : MonoBehaviour
         m_track.DeactivateNote(this);
         LR.EventDispatcher.Instance.Publish(new NoteHitEventData{Note = this});
         
-        Die();
+        Die(true);
     }
 
     public void Miss()
@@ -74,12 +75,12 @@ public class NoteComponent : MonoBehaviour
         m_track.DeactivateNote(this);
         LR.EventDispatcher.Instance.Publish(new NoteMissedEventData{Note = this});
         
-        Die();
+        Die(false);
     }
     
-    public void Die()
+    public void Die(bool isHit)
     {
-        LR.EventDispatcher.Instance.Publish(new NoteDiedEventData{Note = this});
+        LR.EventDispatcher.Instance.Publish(new NoteDiedEventData{Note = this, IsHit = isHit});
     }
 
     public NoteHitResult CheckInput(GameplayInputActionInfos inputActionInfos, float currentTime)

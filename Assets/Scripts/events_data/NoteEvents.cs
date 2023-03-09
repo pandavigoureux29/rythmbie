@@ -5,6 +5,7 @@ using UnityEngine;
 public struct NoteDiedEventData
 {
     public NoteComponent Note;
+    public bool IsHit;
 }
 
 
