@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private NotesGenerator m_notesGenerator;
     [SerializeField] private ScoreManager m_scoreManager;
     [SerializeField] private GameParticleEffectsManager m_effectsManager;
+
+    [SerializeField] private List<CharacterVisual> m_characters;
 
     public SongDataSO SongData => m_songAsset;
     public ScoreManager ScoreManager => m_scoreManager;
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour
         m_tracks.Initialize();
         m_notesGenerator.Initialize(m_songAsset);
         m_effectsManager.Initialize();
+        m_characters.ForEach(x=>x.Initialize());
         m_audio.clip = m_songAsset.Clip;
 
         //call after everything is loaded
