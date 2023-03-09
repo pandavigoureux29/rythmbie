@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NoteComponent : MonoBehaviour
 {
+    [SerializeField] private NoteVisual m_visual;
+    
     private NoteData m_noteData;
     public NoteData Data => m_noteData;
     private Track m_track;
@@ -25,6 +27,8 @@ public class NoteComponent : MonoBehaviour
 
         m_extraTime = (track.DistanceTotal - track.DistanceToSlot) / GameManager.Instance.SongData.Speed;
         m_totalTime = m_noteData.Time + m_extraTime;
+        
+        m_visual.SetDirection(m_track.Direction);
     }
 
     public void ManualUpdate(float time)

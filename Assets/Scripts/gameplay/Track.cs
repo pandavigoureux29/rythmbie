@@ -15,6 +15,8 @@ public class Track : MonoBehaviour
 
     [SerializeField] private Transform m_slot;
 
+    [SerializeField] private InputRegion m_region;
+
     private float m_distanceTotal;
     public float DistanceTotal => m_distanceTotal;
 
