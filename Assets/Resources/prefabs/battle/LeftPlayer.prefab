@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_charAnimator: {fileID: 3059529121379570291}
   m_region: 0
-  m_fireArmEffect: {fileID: 8355817688299213579}
+  m_weaponVisual: {fileID: 6299897412716443624}
 --- !u!1001 &340181664544526933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,11 +117,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b801639d80a2a84fbf1d580838a1cc1, type: 3}
---- !u!198 &8355817688299213579 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8596600387505946974, guid: 4b801639d80a2a84fbf1d580838a1cc1, type: 3}
+--- !u!114 &6299897412716443624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6040780905463326141, guid: 4b801639d80a2a84fbf1d580838a1cc1, type: 3}
   m_PrefabInstance: {fileID: 340181664544526933}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06edf3baf2b1e64e83a7524677bfbc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3107977000422647231
 PrefabInstance:
   m_ObjectHideFlags: 0

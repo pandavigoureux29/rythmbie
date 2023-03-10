@@ -39,9 +39,6 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
-        //TODO remove this
-        m_audio.mute = true;
-
         m_audio.Play();
         m_paused = false;
     }
