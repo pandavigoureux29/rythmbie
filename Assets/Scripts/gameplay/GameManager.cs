@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -55,5 +56,10 @@ public class GameManager : MonoBehaviour
     public void CheckInput(GameplayInputActionInfos inputActionInfos)
     {
         m_tracks.CheckTracks(inputActionInfos, m_audio.time);
+    }
+
+    public void QuitToBoot()
+    {
+        SceneManager.LoadScene("Boot");
     }
 }
