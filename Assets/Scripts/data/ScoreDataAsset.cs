@@ -24,6 +24,11 @@ public class ScoreDataAsset : ScriptableObject
 
         return result;
     }
+
+    public ScoreDataAccuracy GetScoreData(ScoreAccuracy scoreAccuracy)
+    {
+        return Accuracies.FirstOrDefault(x => x.Accuracy == scoreAccuracy);
+    }
 }
 
 [Serializable]
@@ -31,4 +36,5 @@ public class ScoreDataAccuracy
 {
     [SerializeField] public ScoreAccuracy Accuracy;
     [SerializeField] public float DeltaTime;
+    [SerializeField] public int Score;
 }

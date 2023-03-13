@@ -24,4 +24,5 @@ public struct NoteMissedEventData
 public struct NoteHitEventData
 {
     public NoteComponent Note;
+    public ScoreAccuracy Accuracy;
 }

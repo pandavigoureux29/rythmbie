@@ -69,13 +69,13 @@ public class NoteComponent : MonoBehaviour, INote
         Destroy(gameObject);
     }
 
-    public void Hit()
+    public void Hit(ScoreAccuracy accuracy)
     {
         if(State == INote.NoteState.DEAD)
             return;
         
         OnHit?.Invoke();
-        LR.EventDispatcher.Instance.Publish(new NoteHitEventData{Note = this});
+        LR.EventDispatcher.Instance.Publish(new NoteHitEventData{Note = this, Accuracy = accuracy});
         
         m_track.DeactivateNote(this);
         Die(true);
@@ -100,10 +100,10 @@ public class NoteComponent : MonoBehaviour, INote
         LR.EventDispatcher.Instance.Publish(new NoteDiedEventData{Note = this, IsHit = isHit});
     }
 
-    public NoteHitResult CheckInput(GameplayInputActionInfos inputActionInfos, float currentTime)
+    public NoteInputResult CheckInput(GameplayInputActionInfos inputActionInfos, float currentTime)
     {
         if (State != INote.NoteState.ACTIVE)
-            return NoteHitResult.NONE;
+            return NoteInputResult.None;
         
         //check input ype for this note
         bool isCorrectInputType = false;
@@ -117,13 +117,16 @@ public class NoteComponent : MonoBehaviour, INote
         }
 
         if (!isCorrectInputType)
-            return NoteHitResult.NONE;
+            return NoteInputResult.None;
 
         float deltaTime = Mathf.Abs(currentTime - Data.Time);
         var accuracy = GameManager.Instance.ScoreManager.ScoreData.GetAccuracy(deltaTime);
-        
 //        Debug.Log($"delta : {deltaTime} cur : {currentTime} note : {m_noteData.Time}  ACC : {accuracy}");
 
-        return accuracy != ScoreAccuracy.MISSED ? NoteHitResult.HIT : NoteHitResult.MISSED;
+        return new NoteInputResult
+        {
+            HitResult = accuracy != ScoreAccuracy.MISSED ? NoteHitResult.HIT : NoteHitResult.MISSED,
+            Accuracy =  accuracy
+        };
     }
 }

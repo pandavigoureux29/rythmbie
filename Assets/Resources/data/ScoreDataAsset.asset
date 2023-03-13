@@ -15,7 +15,10 @@ MonoBehaviour:
   Accuracies:
   - Accuracy: 0
     DeltaTime: 0.1
+    Score: 10
   - Accuracy: 1
     DeltaTime: 0.2
+    Score: 5
   - Accuracy: 2
     DeltaTime: 0.3
+    Score: 1

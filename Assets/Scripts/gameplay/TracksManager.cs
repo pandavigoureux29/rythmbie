@@ -30,12 +30,12 @@ public class TracksManager : MonoBehaviour
         var tracks = inputActionInfos.inputRegion == InputRegion.LEFT ? m_leftTracks : m_rightTracks;
         NoteComponent bestNote = GetCurrentClosestNoteInTracks(tracks);
         
-        var hitResult = bestNote != null ? bestNote.CheckInput(inputActionInfos, currentTime) : NoteHitResult.NONE;
+        NoteInputResult inputResult = bestNote != null ? bestNote.CheckInput(inputActionInfos, currentTime) : NoteInputResult.None;
 
-        switch (hitResult)
+        switch (inputResult.HitResult)
         {
             case NoteHitResult.HIT :
-                bestNote.Hit();
+                bestNote.Hit(inputResult.Accuracy);
                 break;
             case NoteHitResult.MISSED:
                 bestNote.Miss();
