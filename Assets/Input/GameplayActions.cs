@@ -111,8 +111,19 @@ public partial class @GameplayActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e77e634b-1103-426a-ac2f-0fc4fa90e76e"",
-                    ""path"": ""<Touchscreen>/primaryTouch"",
+                    ""path"": ""<Touchscreen>/touch0"",
                     ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63a3f7a7-dd30-400f-b52c-a654887674ea"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Press"",
