@@ -70,6 +70,8 @@ public class NotesGenerator : MonoBehaviour
         newNote.gameObject.SetActive(true);
         newNote.Initialize(noteData,track, timeCreated);
         track.AddNote(newNote);
+        
+        LR.EventDispatcher.Instance.Publish( new NoteCreatedEventData{Note = newNote, TimeCreated = timeCreated});
     }
 
     private void OnNoteDied(NoteDiedEventData noteEvent)

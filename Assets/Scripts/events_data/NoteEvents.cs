@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct NoteCreatedEventData
+{
+    public NoteComponent Note;
+    public float TimeCreated;
+}
+
 public struct NoteDiedEventData
 {
     public NoteComponent Note;

@@ -14,7 +14,7 @@ public class TracksManager : MonoBehaviour
         m_tracks = m_leftTracks.ToList();
         m_tracks.InsertRange(0, m_rightTracks);
         
-        m_tracks.ForEach(x=>x.Initialize(this));
+        m_tracks.ForEach(x=>x.Initialize());
     }
 
     public void ManualUpdate(float time)
@@ -50,7 +50,7 @@ public class TracksManager : MonoBehaviour
         //find note with the minimum time in tracks ( closest to its slot )
         foreach (var track in tracks)
         {
-            tempNote = track.CurrentNote;
+            tempNote = track.CurrentNote as NoteComponent;
             if (tempNote != null && tempNote.Data.Time < bestTime)
             {
                 bestNote = tempNote;

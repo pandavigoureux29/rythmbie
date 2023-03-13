@@ -27,43 +27,35 @@ public class Track : MonoBehaviour
     private Vector3 m_direction;
     public Vector3 Direction => m_direction;
 
-    private List<NoteComponent> m_notes = new List<NoteComponent>();
-    private List<NoteComponent> m_notesToRemove = new List<NoteComponent>();
+    private List<INote> m_notes = new List<INote>();
+    private List<INote> m_notesToRemove = new List<INote>();
 
     // Notes can be still updated but are not hittable anymore
-    private List<NoteComponent> m_activeNotes = new List<NoteComponent>();
+    private List<INote> m_activeNotes = new List<INote>();
     
-    public TracksManager TracksManager
-    {
-        get;
-        private set;
-    }
+    public INote CurrentNote => m_activeNotes.Count > 0 ? m_activeNotes[0] : null;
 
-    public NoteComponent CurrentNote => m_activeNotes.Count > 0 ? m_activeNotes[0] : null;
-
-    public void Initialize(TracksManager manager)
+    public void Initialize()
     {
         m_distanceToSlot = (m_slot.position - m_begin.position).magnitude;
         
         var beginToEndVector = m_end.position - m_begin.position;
         m_distanceTotal = beginToEndVector.magnitude;
         m_direction = beginToEndVector.normalized;
-        
-        TracksManager = manager;
     }
 
-    public void AddNote(NoteComponent note)
+    public void AddNote(INote note)
     {
         m_notes.Add(note);
         m_activeNotes.Add(note);
     }
 
-    public void DeactivateNote(NoteComponent note)
+    public void DeactivateNote(INote note)
     {
         m_activeNotes.Remove(note);
     }
 
-    public void RemoveNote(NoteComponent note)
+    public void RemoveNote(INote note)
     {
         DeactivateNote(note);
         m_notes.Remove(note);

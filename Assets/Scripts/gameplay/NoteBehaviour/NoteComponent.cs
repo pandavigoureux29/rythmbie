@@ -1,13 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteComponent : MonoBehaviour
+public class NoteComponent : MonoBehaviour, INote
 {
     [SerializeField] private NoteVisual m_visual;
     
-    private NoteData m_noteData;
-    public NoteData Data => m_noteData;
+    public NoteData Data { get; set; }
     private Track m_track;
     public Track Track => m_track;
     private float m_timeCreated;
@@ -19,17 +19,24 @@ public class NoteComponent : MonoBehaviour
 
     private float m_totalTime = 0;
 
+    public INote.NoteState State { get; set; } = INote.NoteState.DEAD;
+
+    public Action OnHit;
+    public Action OnMissed;
+    public Action OnDied;
+    
     public void Initialize(NoteData noteData, Track track, float timeCreated)
     {
-        m_noteData = noteData;
+        Data = noteData;
         m_track = track;
         transform.position = track.Begin.position;
         m_timeCreated = timeCreated;
 
         m_extraTime = (track.DistanceTotal - track.DistanceToSlot) / GameManager.Instance.SongData.Speed;
-        m_totalTime = m_noteData.Time + m_extraTime;
+        m_totalTime = Data.Time + m_extraTime;
         
         m_visual.SetDirection(m_track.Direction);
+        State = INote.NoteState.ACTIVE;
     }
 
     public void ManualUpdate(float time)
@@ -53,7 +60,7 @@ public class NoteComponent : MonoBehaviour
     public void CleanUp()
     {
         m_track.RemoveNote(this);
-        m_noteData = null;
+        Data = null;
         m_track = null;
     }
 
@@ -64,34 +71,47 @@ public class NoteComponent : MonoBehaviour
 
     public void Hit()
     {
-        m_track.DeactivateNote(this);
+        if(State == INote.NoteState.DEAD)
+            return;
+        
+        OnHit?.Invoke();
         LR.EventDispatcher.Instance.Publish(new NoteHitEventData{Note = this});
         
+        m_track.DeactivateNote(this);
         Die(true);
     }
 
     public void Miss()
     {
-        m_track.DeactivateNote(this);
+        if(State == INote.NoteState.DEAD)
+            return;
+        
+        OnMissed?.Invoke();
         LR.EventDispatcher.Instance.Publish(new NoteMissedEventData{Note = this});
         
+        m_track.DeactivateNote(this);
         Die(false);
     }
     
     public void Die(bool isHit)
     {
+        State = INote.NoteState.DEAD;
+        OnDied?.Invoke();
         LR.EventDispatcher.Instance.Publish(new NoteDiedEventData{Note = this, IsHit = isHit});
     }
 
     public NoteHitResult CheckInput(GameplayInputActionInfos inputActionInfos, float currentTime)
     {
+        if (State != INote.NoteState.ACTIVE)
+            return NoteHitResult.NONE;
+        
         //check input ype for this note
         bool isCorrectInputType = false;
 
         switch (inputActionInfos.inputType)
         {
             case InputActionType.TAP_STARTED:
-                if (m_noteData.Type == NoteType.SIMPLE)
+                if (Data.Type == NoteType.SIMPLE)
                     isCorrectInputType = true;
                 break;
         }
@@ -99,7 +119,7 @@ public class NoteComponent : MonoBehaviour
         if (!isCorrectInputType)
             return NoteHitResult.NONE;
 
-        float deltaTime = Mathf.Abs(currentTime - m_noteData.Time);
+        float deltaTime = Mathf.Abs(currentTime - Data.Time);
         var accuracy = GameManager.Instance.ScoreManager.ScoreData.GetAccuracy(deltaTime);
         
 //        Debug.Log($"delta : {deltaTime} cur : {currentTime} note : {m_noteData.Time}  ACC : {accuracy}");

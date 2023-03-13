@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     private bool m_paused = true;
 
+    public Action<float> OnUpdateEvent;
+    
     private void Awake()
     {
         m_instance = this;
@@ -51,6 +53,8 @@ public class GameManager : MonoBehaviour
         
         m_notesGenerator.ManualUpdate(m_audio.time);
         m_tracks.ManualUpdate(m_audio.time);
+        
+        OnUpdateEvent?.Invoke(m_audio.time);
     }
 
     public void CheckInput(GameplayInputActionInfos inputActionInfos)
