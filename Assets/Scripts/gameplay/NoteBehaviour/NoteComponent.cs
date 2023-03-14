@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class NoteComponent : MonoBehaviour, INote
 {
-    [SerializeField] private NoteVisual m_visual;
-    
     public NoteData Data { get; set; }
     private Track m_track;
     public Track Track => m_track;
@@ -21,9 +19,11 @@ public class NoteComponent : MonoBehaviour, INote
 
     public INote.NoteState State { get; set; } = INote.NoteState.DEAD;
 
+    public Action OnStarted;
     public Action OnHit;
     public Action OnMissed;
     public Action OnDied;
+    public Action OnAttack;
     
     public void Initialize(NoteData noteData, Track track, float timeCreated)
     {
@@ -35,26 +35,67 @@ public class NoteComponent : MonoBehaviour, INote
         m_extraTime = (track.DistanceTotal - track.DistanceToSlot) / GameManager.Instance.SongData.Speed;
         m_totalTime = Data.Time + m_extraTime;
         
-        m_visual.SetDirection(m_track.Direction);
         State = INote.NoteState.ACTIVE;
+        OnStarted?.Invoke();
     }
 
     public void ManualUpdate(float time)
     {
         //time progression of the note on the track [0,1]
         var timeProgression = Mathf.InverseLerp(m_timeCreated, m_totalTime, time);
+        
+        switch (State)
+        {
+            case INote.NoteState.DEAD :
+                break;
+            case INote.NoteState.ACTIVE:
+                UpdateActiveState(timeProgression);
+                break;
+            case INote.NoteState.HIT :
+                UpdateHitState();
+                break;
+            case INote.NoteState.MISS:
+                UpdateMissState(timeProgression);
+                break;
+            case INote.NoteState.ATTACK:
+                UpdateAttackState();
+                break;
+        }
+    }
 
+    protected virtual void UpdateActiveState(float timeProgression)
+    {
+        MoveToTarget(timeProgression);
+        if(timeProgression >= 1)
+            Miss();
+    }
+
+    protected virtual void UpdateMissState(float timeProgression)
+    {
+        MoveToTarget(timeProgression);
         if (timeProgression >= 1)
         {
-            Miss();
+            State = INote.NoteState.ATTACK;
+            OnAttack?.Invoke();
         }
-        else
-        {
-            m_distanceDone = Mathf.Lerp(0, m_track.DistanceTotal, timeProgression);
+    }
 
-            var position = m_track.Begin.position + m_track.Direction * m_distanceDone;
-            transform.position = position;
-        }
+    protected virtual void UpdateHitState()
+    {
+        
+    }
+
+    protected virtual void UpdateAttackState()
+    {
+        
+    }
+
+    void MoveToTarget(float timeProgression)
+    {
+        m_distanceDone = Mathf.Lerp(0, m_track.DistanceTotal, timeProgression);
+
+        var position = m_track.Begin.position + m_track.Direction * m_distanceDone;
+        transform.position = position;
     }
 
     public void CleanUp()
@@ -69,7 +110,7 @@ public class NoteComponent : MonoBehaviour, INote
         Destroy(gameObject);
     }
 
-    public void Hit(ScoreAccuracy accuracy)
+    public virtual void Hit(ScoreAccuracy accuracy)
     {
         if(State == INote.NoteState.DEAD)
             return;
@@ -90,7 +131,7 @@ public class NoteComponent : MonoBehaviour, INote
         LR.EventDispatcher.Instance.Publish(new NoteMissedEventData{Note = this});
         
         m_track.DeactivateNote(this);
-        Die(false);
+        State = INote.NoteState.MISS;
     }
     
     public void Die(bool isHit)
@@ -100,7 +141,7 @@ public class NoteComponent : MonoBehaviour, INote
         LR.EventDispatcher.Instance.Publish(new NoteDiedEventData{Note = this, IsHit = isHit});
     }
 
-    public NoteInputResult CheckInput(GameplayInputActionInfos inputActionInfos, float currentTime)
+    public virtual NoteInputResult CheckInput(GameplayInputActionInfos inputActionInfos, float currentTime)
     {
         if (State != INote.NoteState.ACTIVE)
             return NoteInputResult.None;

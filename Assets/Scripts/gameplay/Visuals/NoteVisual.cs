@@ -11,14 +11,27 @@ public class NoteVisual : MonoBehaviour
     [SerializeField] private float m_rightRotationY;
     [SerializeField] private float m_leftRotationY;
 
-    [SerializeField] private GameObject m_note;
+    [SerializeField] private GameObject m_noteBeacon;
 
-    public void StartNote()
+    [SerializeField] private float m_attackDuration = 2;
+
+    private Vector3 m_animatorInitialPosition;
+
+    public void Awake()
+    {
+        m_noteComponent.OnStarted += StartNote;
+        m_animatorInitialPosition = m_animator.transform.localPosition;
+    }
+
+    void StartNote()
     {
         m_noteComponent.OnDied += OnNoteDied;
         m_noteComponent.OnHit += OnNoteHit;
         m_noteComponent.OnMissed += OnNoteMiss;
+        m_noteComponent.OnAttack += OnAttack;
         ToggleNote(true);
+        SetDirection(m_noteComponent.Track.Direction);
+        m_animator.enabled = true;
     }
     
     public void SetDirection(Vector3 direction)
@@ -34,6 +47,7 @@ public class NoteVisual : MonoBehaviour
     void OnNoteDied()
     {
         ToggleNote(false);
+        Reset();
     }
     
     void OnNoteMiss()
@@ -46,13 +60,36 @@ public class NoteVisual : MonoBehaviour
         ToggleNote(false);
     }
 
+    void OnAttack()
+    {
+        m_animator.SetTrigger("Attack");
+        StartCoroutine(WaitForEndAttackCoroutine());
+    }
+
+    IEnumerator WaitForEndAttackCoroutine()
+    {
+        yield return new WaitForSeconds(m_attackDuration);
+        m_noteComponent.Die(false);
+        Reset();
+    }
+
     public void ToggleNote(bool toggle)
     {
-        m_note.SetActive(toggle);
+        m_noteBeacon.SetActive(toggle);
     }
 
     public void Reset()
     {
         m_noteComponent.OnDied -= OnNoteDied;
+        m_noteComponent.OnHit -= OnNoteHit;
+        m_noteComponent.OnMissed -= OnNoteMiss;
+
+        m_animator.enabled = false;
+        m_animator.transform.localPosition = m_animatorInitialPosition;
+    }
+
+    private void OnDestroy()
+    {
+        Reset();
     }
 }

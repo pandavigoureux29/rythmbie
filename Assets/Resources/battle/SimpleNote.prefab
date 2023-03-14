@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86caca3a9d80f364f97861518559e581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_visual: {fileID: 9140540894327454365}
 --- !u!1 &6777190923647246090
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,11 +206,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f981e839950a6441873dac566764f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_noteComponent: {fileID: 0}
+  m_noteComponent: {fileID: 4037151885955755842}
   m_animator: {fileID: 8012467828180456308}
   m_rightRotationY: 90
   m_leftRotationY: -90
-  m_note: {fileID: 0}
+  m_noteBeacon: {fileID: 6777190923647246090}
+  m_attackDuration: 0.6
 --- !u!1001 &7954420816905619468
 PrefabInstance:
   m_ObjectHideFlags: 0
