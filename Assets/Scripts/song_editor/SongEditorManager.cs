@@ -247,8 +247,8 @@ public class SongEditorManager : MonoBehaviour {
 			AudioComponent.clip = m_songAsset.Clip;
 			//compute playbar time
 			float deltaX = m_camera.PlayBar.localPosition.x - m_startX;
-			AudioComponent.timeSamples = (int)(deltaX / UnitsPerSeconds) * 120;// music.frequency;
 
+			AudioComponent.time = (int)(deltaX / UnitsPerSeconds);
 			AudioComponent.Play();
 
 			m_playerNotes.Play();
