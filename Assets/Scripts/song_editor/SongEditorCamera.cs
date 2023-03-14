@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -15,6 +16,8 @@ public class SongEditorCamera : MonoBehaviour {
 	[SerializeField] float m_cameraZ = 0.0f;
 	[SerializeField] float m_cameraY = 0.6f;
 	[HideInInspector] [SerializeField] float m_currentTime = 0;
+
+	[SerializeField] private float m_deltaTimeBars = 10;
 
 	float m_initPlayBarPosX = 0;
 
@@ -170,12 +173,12 @@ public class SongEditorCamera : MonoBehaviour {
 
 	void PlaceTimeBars(){		
 #if UNITY_EDITOR
-		int time = (int) (SceneView.lastActiveSceneView.pivot.x / m_manager.UnitsPerSeconds) -3;
+		int time = (int) (SceneView.lastActiveSceneView.pivot.x / m_deltaTimeBars) -3;
 		if (time < 0)
 			time = 0;
 		for (int i=0; i < m_timeBars.Count; i++) {
 			GameObject timeBar = m_timeBars[i];
-			Utils.SetLocalPositionX(timeBar.transform, m_manager.UnitsPerSeconds * (float)time);
+			Utils.SetLocalPositionX(timeBar.transform, m_deltaTimeBars * (float)time);
 			//Text
 			TextMesh tm = timeBar.GetComponentInChildren<TextMesh>();
 			tm.text = ""+ time;
