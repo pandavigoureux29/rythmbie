@@ -6,12 +6,14 @@ public class CharacterVisual : MonoBehaviour
 {
     [SerializeField] private Animator m_charAnimator;
     [SerializeField] private InputRegion m_region;
+    [SerializeField] private ParticleSystem m_bloodSplatterVFX;
 
     [SerializeField] private WeaponVisual m_weaponVisual;
     
     public void Initialize()
     {
         LR.EventDispatcher.Instance.Subscribe<NoteHitEventData>(OnNoteHit);
+        LR.EventDispatcher.Instance.Subscribe<NoteAttackEventData>(OnNoteAttack);
     }
 
     void OnNoteHit(NoteHitEventData noteEventData)
@@ -20,6 +22,12 @@ public class CharacterVisual : MonoBehaviour
         {
             Fire();
         }
+    }
+
+    void OnNoteAttack(NoteAttackEventData eventData)
+    {
+        if(eventData.Region == m_region)
+            m_bloodSplatterVFX.Play();
     }
 
     void Fire()

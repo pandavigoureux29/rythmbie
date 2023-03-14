@@ -26,3 +26,9 @@ public struct NoteHitEventData
     public NoteComponent Note;
     public ScoreAccuracy Accuracy;
 }
+
+public struct NoteAttackEventData
+{
+    public NoteComponent Note;
+    public InputRegion Region;
+}

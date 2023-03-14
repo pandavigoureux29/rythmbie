@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
         //call after everything is loaded
         StartGame();
+        LR.EventDispatcher.Instance.Subscribe<LifeChangedEventData>(OnLifeChanged);
     }
 
     private void StartGame()
@@ -60,6 +61,14 @@ public class GameManager : MonoBehaviour
     public void CheckInput(GameplayInputActionInfos inputActionInfos)
     {
         m_tracks.CheckTracks(inputActionInfos, m_audio.time);
+    }
+
+    private void OnLifeChanged(LifeChangedEventData eventData)
+    {
+        if (eventData.CurrentLife <= 0)
+        {
+            QuitToBoot();
+        }
     }
 
     public void QuitToBoot()

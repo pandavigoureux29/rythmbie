@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class NoteComponent : MonoBehaviour, INote
 {
+    [SerializeField] private int m_damage = 1;
+    public int Damage => m_damage;
+    
     public NoteData Data { get; set; }
     private Track m_track;
     public Track Track => m_track;
@@ -77,6 +80,7 @@ public class NoteComponent : MonoBehaviour, INote
         {
             State = INote.NoteState.ATTACK;
             OnAttack?.Invoke();
+            LR.EventDispatcher.Instance.Publish<NoteAttackEventData>(new NoteAttackEventData { Note = this, Region = Track.Region});
         }
     }
 

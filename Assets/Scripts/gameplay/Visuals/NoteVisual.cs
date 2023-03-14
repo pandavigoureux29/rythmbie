@@ -16,11 +16,13 @@ public class NoteVisual : MonoBehaviour
     [SerializeField] private float m_attackDuration = 2;
 
     private Vector3 m_animatorInitialPosition;
+    private Quaternion m_animatorInitialRotation;
 
     public void Awake()
     {
         m_noteComponent.OnStarted += StartNote;
         m_animatorInitialPosition = m_animator.transform.localPosition;
+        m_animatorInitialRotation = m_animator.transform.localRotation;
     }
 
     void StartNote()
@@ -86,6 +88,7 @@ public class NoteVisual : MonoBehaviour
 
         m_animator.enabled = false;
         m_animator.transform.localPosition = m_animatorInitialPosition;
+        m_animator.transform.localRotation = m_animatorInitialRotation;
     }
 
     private void OnDestroy()
