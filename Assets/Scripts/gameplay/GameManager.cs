@@ -71,6 +71,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void TogglePause()
+    {
+        if (m_audio.isPlaying)
+        {
+            m_audio.Pause();
+        }
+        else
+        {
+            m_audio.UnPause();
+        }
+    }
+
     public void QuitToBoot()
     {
         SceneManager.LoadScene("Boot");

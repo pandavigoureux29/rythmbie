@@ -14,6 +14,9 @@ public class NoteVisual : MonoBehaviour
     [SerializeField] private GameObject m_noteBeacon;
 
     [SerializeField] private float m_attackDuration = 2;
+    [SerializeField] private float m_hitDuration = 1;
+
+    [SerializeField] private ParticleSystem m_hitVFX;
 
     private Vector3 m_animatorInitialPosition;
     private Quaternion m_animatorInitialRotation;
@@ -31,9 +34,12 @@ public class NoteVisual : MonoBehaviour
         m_noteComponent.OnHit += OnNoteHit;
         m_noteComponent.OnMissed += OnNoteMiss;
         m_noteComponent.OnAttack += OnAttack;
-        ToggleNote(true);
+        
         SetDirection(m_noteComponent.Track.Direction);
+        
+        ToggleNote(true);
         m_animator.enabled = true;
+        m_animator.gameObject.SetActive(true);
     }
     
     public void SetDirection(Vector3 direction)
@@ -60,17 +66,20 @@ public class NoteVisual : MonoBehaviour
     void OnNoteHit()
     {
         ToggleNote(false);
+        m_animator.gameObject.SetActive(false);
+        m_hitVFX.Play();
+        StartCoroutine(WaitAndDieCoroutine(m_hitDuration));
     }
 
     void OnAttack()
     {
         m_animator.SetTrigger("Attack");
-        StartCoroutine(WaitForEndAttackCoroutine());
+        StartCoroutine(WaitAndDieCoroutine(m_attackDuration));
     }
 
-    IEnumerator WaitForEndAttackCoroutine()
+    IEnumerator WaitAndDieCoroutine(float time)
     {
-        yield return new WaitForSeconds(m_attackDuration);
+        yield return new WaitForSeconds(time);
         m_noteComponent.Die(false);
         Reset();
     }

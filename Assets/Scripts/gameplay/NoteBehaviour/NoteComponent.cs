@@ -119,11 +119,12 @@ public class NoteComponent : MonoBehaviour, INote
         if(State == INote.NoteState.DEAD)
             return;
         
+        // this will be listened by the visual to and call Die()
         OnHit?.Invoke();
         LR.EventDispatcher.Instance.Publish(new NoteHitEventData{Note = this, Accuracy = accuracy});
         
         m_track.DeactivateNote(this);
-        Die(true);
+        State = INote.NoteState.HIT;
     }
 
     public void Miss()
@@ -131,6 +132,7 @@ public class NoteComponent : MonoBehaviour, INote
         if(State == INote.NoteState.DEAD)
             return;
         
+        // this will be listened by the visual to and call Die()
         OnMissed?.Invoke();
         LR.EventDispatcher.Instance.Publish(new NoteMissedEventData{Note = this});
         
