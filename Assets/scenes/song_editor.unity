@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_manager: {fileID: 1598764959}
-  m_noteHitSound: {fileID: 8300000, guid: b2093e2cffc99c5459a929ecd749544e, type: 3}
+  m_noteHitSound: {fileID: 8300000, guid: ee7c9d3f9cf9c1e40b061a95ee737868, type: 3}
   m_noteLongTailSound: {fileID: 8300000, guid: f07bf92733a2c1548879daeb378383a6, type: 3}
 --- !u!4 &930312225
 Transform:
@@ -815,7 +815,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b2093e2cffc99c5459a929ecd749544e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ee7c9d3f9cf9c1e40b061a95ee737868, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.23
   m_Pitch: 1

@@ -13,40 +13,480 @@ MonoBehaviour:
   m_Name: MasterSlayer
   m_EditorClassIdentifier: 
   m_songName: Master Slayer
-  m_difficulty: 0
+  m_difficulty: 1
   m_music: {fileID: 8300000, guid: 50e029b9645a16d4b96c814afec30295, type: 3}
   m_speed: 3
   m_segments:
   - Id: Track1
     Notes:
-    - m_timeBegin: 2.559957
+    - m_timeBegin: 0
       m_type: 0
       m_trackID: Track1
       m_subtype: 0
       m_head: 0
-    - m_timeBegin: 3.980856
+    - m_timeBegin: 5.448878
       m_type: 0
       m_trackID: Track1
       m_subtype: 0
       m_head: 0
-    - m_timeBegin: 6.503961
+    - m_timeBegin: 9
       m_type: 0
       m_trackID: Track1
       m_subtype: 0
       m_head: 0
-    - m_timeBegin: 9.688736
+    - m_timeBegin: 9.194355
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 9.88
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 10.06406
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 11.74799
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 12.4235
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 14.321161
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 14.51783
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 16.04045
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 19.91991
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 21.39586
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 24.04919
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 24.67093
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 25.31388
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 27.695599
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 28.05
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 28.38863
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 30.02142
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 31.36081
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 32.7
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 34.73593
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 35.4196
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 36.06263
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 36.41307
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 36.7463
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 37.45
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 39.73744
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 39.87701
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 41.87147
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 42.04277
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 42.35665
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 45.00478
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 45.21898
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 46.53611
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 47.37015
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 48.03
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 48.37
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 49.06
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 49.72324
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 52.536873
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 52.713737
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 54.02368
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 55.33952
+      m_type: 0
+      m_trackID: Track1
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 58.54711
       m_type: 0
       m_trackID: Track1
       m_subtype: 0
       m_head: 0
   - Id: Track2
     Notes:
-    - m_timeBegin: 5.247766
+    - m_timeBegin: 6.403637
       m_type: 0
       m_trackID: Track2
       m_subtype: 0
       m_head: 0
-    - m_timeBegin: 8.442823
+    - m_timeBegin: 6.7300005
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 7.667652
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 7.8300004
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 10.36872
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 10.57946
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 13.04524
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 13.24901
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 15.241079
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 15.438501
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 17.1221
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 18.74
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 20.57337
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 22.52657
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 25.31388
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 26.701809
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 27.02839
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 27.35
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 28.7
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 29.05
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 29.40603
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 30.70026
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 32.05
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 33.35364
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 34.04032
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 36.06263
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 36.41307
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 36.7463
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 38.32675
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 38.70665
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 39.03021
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 41.05553
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 41.16973
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 42.51708
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 43.73034
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 44.07217
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 44.39498
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 46.33944
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 47.37649
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 48.71677
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 49.36162
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 50.68122
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 51.02381
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 53.723244
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 54.02776
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 55.023815
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 55.35372
+      m_type: 0
+      m_trackID: Track2
+      m_subtype: 0
+      m_head: 0
+    - m_timeBegin: 58.54711
       m_type: 0
       m_trackID: Track2
       m_subtype: 0
