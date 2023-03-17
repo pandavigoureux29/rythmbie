@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
         if(m_paused)
             return;
         
+        CheckSongDuration();
+        
         m_notesGenerator.ManualUpdate(m_audio.time);
         m_tracks.ManualUpdate(m_audio.time);
         
@@ -66,6 +68,14 @@ public class GameManager : MonoBehaviour
     private void OnLifeChanged(LifeChangedEventData eventData)
     {
         if (eventData.CurrentLife <= 0)
+        {
+            QuitToBoot();
+        }
+    }
+
+    private void CheckSongDuration()
+    {
+        if (m_audio.time >= m_songAsset.Duration)
         {
             QuitToBoot();
         }

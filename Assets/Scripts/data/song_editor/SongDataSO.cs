@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ public class SongDataSO : ScriptableObject {
 	[SerializeField] protected GameDifficulty m_difficulty;
 	[SerializeField] protected AudioClip m_music;
 	[SerializeField] protected float m_speed = 1;
+	[SerializeField] protected float m_songDuration = 20;
 
 	[SerializeField] protected  List< SongDataSegment > m_segments;
 
@@ -33,6 +35,8 @@ public class SongDataSO : ScriptableObject {
 	
 	public AudioClip Clip => m_music;
 	public float Speed => m_speed;
+
+	public float Duration => m_songDuration;
 	
 	public List< SongDataSegment > Segments
 	{
