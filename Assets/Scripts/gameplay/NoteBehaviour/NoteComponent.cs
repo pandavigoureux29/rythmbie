@@ -27,6 +27,7 @@ public class NoteComponent : MonoBehaviour, INote
     public Action OnMissed;
     public Action OnDied;
     public Action OnAttack;
+    public Action OnFocus;
     
     public void Initialize(NoteData noteData, Track track, float timeCreated)
     {
@@ -175,5 +176,10 @@ public class NoteComponent : MonoBehaviour, INote
             HitResult = accuracy != ScoreAccuracy.MISSED ? NoteHitResult.HIT : NoteHitResult.MISSED,
             Accuracy =  accuracy
         };
+    }
+
+    public void SetFocus()
+    {
+        OnFocus?.Invoke();
     }
 }

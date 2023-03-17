@@ -98,7 +98,10 @@ MonoBehaviour:
   m_leftRotationY: -90
   m_noteBeacon: {fileID: 687552135717086891}
   m_attackDuration: 0.6
+  m_hitDuration: 1
   m_hitVFX: {fileID: 2276503034426815624}
+  m_renderer: {fileID: 3671075820909206835}
+  m_focusColor: {r: 0.8679245, g: 0.7566622, b: 0.2251691, a: 1}
 --- !u!1001 &2715036080424657336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -169,6 +172,11 @@ GameObject:
 --- !u!198 &2276503034426815624 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4195804115828167984, guid: e9febcb2130b7e94a8f85f63a1e5aa35, type: 3}
+  m_PrefabInstance: {fileID: 2715036080424657336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3671075820909206835 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1684336280990989451, guid: e9febcb2130b7e94a8f85f63a1e5aa35, type: 3}
   m_PrefabInstance: {fileID: 2715036080424657336}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7954420816905619468

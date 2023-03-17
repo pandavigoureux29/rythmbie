@@ -17,6 +17,10 @@ public class NoteVisual : MonoBehaviour
     [SerializeField] private float m_hitDuration = 1;
 
     [SerializeField] private ParticleSystem m_hitVFX;
+    [SerializeField] private MeshRenderer m_renderer;
+    [SerializeField] private Color m_focusColor;
+
+    private Color m_baseColor;
 
     private Vector3 m_animatorInitialPosition;
     private Quaternion m_animatorInitialRotation;
@@ -26,6 +30,7 @@ public class NoteVisual : MonoBehaviour
         m_noteComponent.OnStarted += StartNote;
         m_animatorInitialPosition = m_animator.transform.localPosition;
         m_animatorInitialRotation = m_animator.transform.localRotation;
+        m_baseColor = m_renderer.material.GetColor("_Zone_Color");
     }
 
     void StartNote()
@@ -34,6 +39,7 @@ public class NoteVisual : MonoBehaviour
         m_noteComponent.OnHit += OnNoteHit;
         m_noteComponent.OnMissed += OnNoteMiss;
         m_noteComponent.OnAttack += OnAttack;
+        m_noteComponent.OnFocus += Focus;
         
         SetDirection(m_noteComponent.Track.Direction);
         
@@ -60,11 +66,13 @@ public class NoteVisual : MonoBehaviour
     
     void OnNoteMiss()
     {
+        UnFocus();
         ToggleNote(false);
     }
     
     void OnNoteHit()
     {
+        UnFocus();
         ToggleNote(false);
         m_animator.gameObject.SetActive(false);
         m_hitVFX.Play();
@@ -84,6 +92,16 @@ public class NoteVisual : MonoBehaviour
         Reset();
     }
 
+    public void Focus()
+    {
+        m_renderer.material.SetColor("_Zone_Color", m_focusColor);
+    }
+
+    private void UnFocus()
+    {
+        m_renderer.material.SetColor("_Zone_Color", m_baseColor);
+    }
+
     public void ToggleNote(bool toggle)
     {
         m_noteBeacon.SetActive(toggle);
@@ -94,10 +112,13 @@ public class NoteVisual : MonoBehaviour
         m_noteComponent.OnDied -= OnNoteDied;
         m_noteComponent.OnHit -= OnNoteHit;
         m_noteComponent.OnMissed -= OnNoteMiss;
+        m_noteComponent.OnFocus -= Focus;
 
         m_animator.enabled = false;
         m_animator.transform.localPosition = m_animatorInitialPosition;
         m_animator.transform.localRotation = m_animatorInitialRotation;
+        
+        UnFocus();
     }
 
     private void OnDestroy()
